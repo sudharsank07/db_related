@@ -1,0 +1,317 @@
+insert into trade_premium.department(id,name,created_by,updated_by,active,inserted_at,updated_at,consignments_flag)
+select id,name,created_by,updated_by,active,inserted_at,updated_at,consignments_flag
+from trade_premium_old.department where id > 1;
+
+SELECT SETVAL((SELECT PG_GET_SERIAL_SEQUENCE('"department"', 'id')), (SELECT (MAX("id") + 1) FROM department), FALSE);
+
+insert into trade_premium.designation(id,name,active,createdby,updatedby,inserted_at,updated_at,salesman_flag,driver_flag)
+select id,name,active,createdby,updatedby,inserted_at,updated_at,salesman_flag,driver_flag
+from trade_premium_old.designation;
+
+SELECT SETVAL((SELECT PG_GET_SERIAL_SEQUENCE('"designation"', 'id')), (SELECT (MAX("id") + 1) FROM designation), FALSE);
+
+insert into trade_premium.division(id,name,description,code,active,created_by,updated_by,inserted_at,updated_at,actual_code,seq_no)
+select id,name,description,code,active,created_by,updated_by,inserted_at,updated_at,actual_code,seq_no
+from trade_premium_old.division;
+
+SELECT SETVAL((SELECT PG_GET_SERIAL_SEQUENCE('"division"', 'id')), (SELECT (MAX("id") + 1) FROM division), FALSE);
+
+
+insert into trade_premium.selection(id,name,description,code,active,created_by,updated_by,inserted_at,updated_at,division_id,actual_code,seq_no,item_content,item_contains)
+select id,name,description,code,active,created_by,updated_by,inserted_at,updated_at,division_id,actual_code,seq_no,item_content,item_contains
+from trade_premium_old.selection;
+
+SELECT SETVAL((SELECT PG_GET_SERIAL_SEQUENCE('"selection"', 'id')), (SELECT (MAX("id") + 1) FROM selection), FALSE);
+
+
+insert into trade_premium.item_category(id,name,description,code,active,created_by,updated_by,inserted_at,updated_at,division_id,section_id,actual_code,is_predefined,seq_no)
+select id,name,description,code,active,created_by,updated_by,inserted_at,updated_at,division_id,section_id,actual_code,is_predefined,seq_no
+from trade_premium_old.item_category;
+
+SELECT SETVAL((SELECT PG_GET_SERIAL_SEQUENCE('"item_category"', 'id')), (SELECT (MAX("id") + 1) FROM item_category), FALSE);
+
+
+insert into trade_premium.item_classification(id,name,description,code,active,created_by,updated_by,inserted_at,updated_at,actual_code,seq_no)
+select id,name,description,code,active,created_by,updated_by,inserted_at,updated_at,actual_code,seq_no
+from trade_premium_old.item_classification;
+
+SELECT SETVAL((SELECT PG_GET_SERIAL_SEQUENCE('"item_classification"', 'id')), (SELECT (MAX("id") + 1) FROM item_classification), FALSE);
+
+
+insert into trade_premium.uom(id,name,code,description,active,created_by,updated_by,inserted_at,updated_at)
+select id,name,code,description,active,created_by,updated_by,inserted_at,updated_at
+from trade_premium_old.uom;
+
+SELECT SETVAL((SELECT PG_GET_SERIAL_SEQUENCE('"uom"', 'id')), (SELECT (MAX("id") + 1) FROM uom), FALSE);
+
+
+insert into trade_premium.taxes(id,active,description,name,inserted_at,updated_at,reg_no,tax_type,is_predefined,default_tax,country)
+select id,active,description,name,inserted_at,updated_at,reg_no,tax_type,is_predefined,default_tax,country
+from trade_premium_old.taxes where id > 1;
+
+SELECT SETVAL((SELECT PG_GET_SERIAL_SEQUENCE('"taxes"', 'id')), (SELECT (MAX("id") + 1) FROM taxes), FALSE);
+
+
+insert into trade_premium.tax_rate(id,tax_name,description,effective_from,filing_recovery,filing_date,reporting_method,sales_flag,sales_rate,purchase_flag,purchase_rate,report_avbl,inserted_at,updated_at,active,created_by,updated_by,taxes_id,tax_type,calculations,charges_ids,is_purchase_rate_per_or_val,is_sales_rate_per_or_val,calc_ids,type_of_ltr,is_predefined,types_of_taxs,is_tds,tds_applicability)
+select id,tax_name,description,effective_from,filing_recovery,filing_date,reporting_method,sales_flag,sales_rate,purchase_flag,purchase_rate,report_avbl,inserted_at,updated_at,active,created_by,updated_by,taxes_id,tax_type,calculations,charges_ids,is_purchase_rate_per_or_val,is_sales_rate_per_or_val,calc_ids,type_of_ltr,is_predefined,types_of_taxs,is_tds,tds_applicability
+from trade_premium_old.tax_rate where id > 3;
+
+SELECT SETVAL((SELECT PG_GET_SERIAL_SEQUENCE('"tax_rate"', 'id')), (SELECT (MAX("id") + 1) FROM tax_rate), FALSE);
+
+
+insert into trade_premium.roles(id,name,code,active,inserted_at,updated_at,is_admin,is_super_admin)
+select id,name,code,active,inserted_at,updated_at,is_admin,is_super_admin
+from trade_premium_old.roles where id > 1;
+
+SELECT SETVAL((SELECT PG_GET_SERIAL_SEQUENCE('"roles"', 'id')), (SELECT (MAX("id") + 1) FROM roles), FALSE);
+
+
+insert into trade_premium.users(id,name,email,password_hash,created_by,updated_by,active,inserted_at,updated_at,roles_id,department_id,reporting_to,till_machine_id,login_id,pass_updated_on,process_ekc_id,designation_id,age,dob,expiry_date,insurance_no,license_no,type_of_grade,event_tab_rights,emp_id,emp_code,public_country_mstr_id,dial_code,mobile_no)
+select id,name,email,password_hash,created_by,updated_by,active,inserted_at,updated_at,roles_id,department_id,reporting_to,till_machine_id,login_id,pass_updated_on,process_ekc_id,designation_id,age,dob,expiry_date,insurance_no,license_no,type_of_grade,event_tab_rights,emp_id,emp_code,public_country_mstr_id,dial_code,mobile_no
+from trade_premium_old.users where id >  1;
+
+SELECT SETVAL((SELECT PG_GET_SERIAL_SEQUENCE('"users"', 'id')), (SELECT (MAX("id") + 1) FROM users), FALSE);
+
+
+
+insert into trade_premium.hs_code(id,name,description,code,selling_rate,purchase_rate,created_by,updated_by,active,inserted_at,updated_at,purchase_tax_id,selling_tax_id,item_category_id,project_category_id)
+select id,name,description,code,selling_rate,purchase_rate,created_by,updated_by,active,inserted_at,updated_at,purchase_tax_id,selling_tax_id,item_category_id,project_category_id
+from trade_premium_old.hs_code;
+
+SELECT SETVAL((SELECT PG_GET_SERIAL_SEQUENCE('"hs_code"', 'id')), (SELECT (MAX("id") + 1) FROM hs_code), FALSE);
+
+
+insert into trade_premium.hsn_tax(id,hs_code_id,tax_id,is_included_in_po,active,inserted_at,updated_at,to_be_added_in_cogs)
+select id,hs_code_id,tax_id,is_included_in_po,active,inserted_at,updated_at,to_be_added_in_cogs
+from trade_premium_old.hsn_tax;
+
+SELECT SETVAL((SELECT PG_GET_SERIAL_SEQUENCE('"hsn_tax"', 'id')), (SELECT (MAX("id") + 1) FROM hsn_tax), FALSE);
+
+
+insert into trade_premium.charges(id,active,name,description,created_by,updated_by,inserted_at,updated_at,ledger,tax,type,indirect_tax_id,is_predefined)
+select id,active,name,description,created_by,updated_by,inserted_at,updated_at,ledger,tax,type,indirect_tax_id,is_predefined
+from trade_premium_old.charges where id  > 7 ;
+
+SELECT SETVAL((SELECT PG_GET_SERIAL_SEQUENCE('"charges"', 'id')), (SELECT (MAX("id") + 1) FROM charges), FALSE);
+
+insert into trade_premium.terms(id,charges_ids,name,description,created_by,updated_by,active,inserted_at,updated_at)
+select id,charges_ids,name,description,created_by,updated_by,active,inserted_at,updated_at
+from trade_premium_old.terms;
+
+SELECT SETVAL((SELECT PG_GET_SERIAL_SEQUENCE('"terms"', 'id')), (SELECT (MAX("id") + 1) FROM terms), FALSE);
+
+
+insert into trade_premium.vendor_type_mstrs(id,name,active,created_by,updated_by,inserted_at,updated_at,is_predefined)
+select id,name,active,created_by,updated_by,inserted_at,updated_at,is_predefined
+from trade_premium_old.vendor_type_mstrs where id > 2;
+
+SELECT SETVAL((SELECT PG_GET_SERIAL_SEQUENCE('"vendor_type_mstrs"', 'id')), (SELECT (MAX("id") + 1) FROM vendor_type_mstrs), FALSE);
+
+
+
+insert into trade_premium.customer_types(id,name,description,created_by,updated_by,active,inserted_at,updated_at,is_predefined)
+select id,name,description,created_by,updated_by,active,inserted_at,updated_at,is_predefined
+from trade_premium_old.customer_types  where id > 3;
+
+SELECT SETVAL((SELECT PG_GET_SERIAL_SEQUENCE('"customer_types"', 'id')), (SELECT (MAX("id") + 1) FROM customer_types), FALSE);
+
+
+insert into trade_premium.common_master(id,description,name,mstr_type,active,created_by_id,updated_by_id,inserted_at,updated_at,transaction_type,remarks,is_mandatory,is_predefined,ware_house_st_location_id,department_ids,project_category_id,billable_flag,event_id,amount)
+select id,description,name,mstr_type,active,created_by_id,updated_by_id,inserted_at,updated_at,transaction_type,remarks,is_mandatory,is_predefined,ware_house_st_location_id,department_ids,project_category_id,billable_flag,event_id,amount
+from trade_premium_old.common_master where id > 13;
+
+SELECT SETVAL((SELECT PG_GET_SERIAL_SEQUENCE('"common_master"', 'id')), (SELECT (MAX("id") + 1) FROM common_master), FALSE);
+
+
+insert into trade_premium.item(id,name,item_code,only_code,image_seq,image_name,image_url,seq_no,created_by,updated_by,brand,colors,hs_code_desc,active,item_category_id,division_id,section_id,item_type_id,item_classification_id,hs_code_id,inserted_at,updated_at,packaging_unit,bar_code,is_type_bar_code,reason_for_inactivation,ware_house_id,approved_status,approved_on,approved_by,approved_no,material_id,vendor_bar_code,copy_item_id,material_item_id,is_content_ltr,ltr_content_ratio,raw_material_make_id,tube_code,old_item_code,created_date,attachments_upload,short_name,image_uploaded_year,transaction_type,rcm,brand_multi,item_code_lt,only_code_lt,item_code_lts,item_code_seq,is_contains,ltr_contains_ratio)
+select id,name,item_code,only_code,image_seq,image_name,image_url,seq_no,created_by,updated_by,brand,colors,hs_code_desc,active,item_category_id,division_id,section_id,item_type_id,item_classification_id,hs_code_id,inserted_at,updated_at,packaging_unit,bar_code,is_type_bar_code,reason_for_inactivation,ware_house_id,approved_status,approved_on,approved_by,approved_no,material_id,vendor_bar_code,copy_item_id,material_item_id,is_content_ltr,ltr_content_ratio,raw_material_make_id,tube_code,old_item_code,created_date,attachments_upload,short_name,image_uploaded_year,transaction_type,rcm,brand_multi,item_code_lt,only_code_lt,item_code_lts,item_code_seq,is_contains,ltr_contains_ratio
+from trade_premium_old.item ;
+
+SELECT SETVAL((SELECT PG_GET_SERIAL_SEQUENCE('"item"', 'id')), (SELECT (MAX("id") + 1) FROM item), FALSE);
+
+
+insert into trade_premium.item_uom(id,type,dimension,created_by,updated_by,item_mstr_id,uom_id,active,inserted_at,updated_at)
+select id,type,dimension,created_by,updated_by,item_mstr_id,uom_id,active,inserted_at,updated_at
+from trade_premium_old.item_uom ;
+
+SELECT SETVAL((SELECT PG_GET_SERIAL_SEQUENCE('"item_uom"', 'id')), (SELECT (MAX("id") + 1) FROM item_uom), FALSE);
+
+
+insert into trade_premium.item_uom_conversions(id,item_mstr_id,factors,created_by,updated_by,active,from_uom_id,to_uom_id,inserted_at,updated_at)
+select id,item_mstr_id,factors,created_by,updated_by,active,from_uom_id,to_uom_id,inserted_at,updated_at
+from trade_premium_old.item_uom_conversions ;
+
+SELECT SETVAL((SELECT PG_GET_SERIAL_SEQUENCE('"item_uom_conversions"', 'id')), (SELECT (MAX("id") + 1) FROM item_uom_conversions), FALSE);
+
+update trade_premium.item_uom
+set site_ids = '{3}' where type ='Selling UOM';
+
+insert into trade_premium.item_mstr_attribute(id,field_type,attribute_text,attribute_list_id,item_mstr_id,version,created_by,updated_by,active,attribute_type_id,inserted_at,updated_at)
+select id,field_type,attribute_text,attribute_list_id,item_mstr_id,version,created_by,updated_by,active,attribute_type_id,inserted_at,updated_at
+from trade_premium_old.item_mstr_attribute ;
+
+SELECT SETVAL((SELECT PG_GET_SERIAL_SEQUENCE('"item_mstr_attribute"', 'id')), (SELECT (MAX("id") + 1) FROM item_mstr_attribute), FALSE);
+
+
+insert into trade_premium.customer(id,name,company_type,company_name,brand_name,owner_name,item_category,ar_ledger,person_name,person_email,address,mobile_number,phone_number,credit_day,credit_limit,credit_rate,credit_limit_set,credit_days,overdue_amount,office_address1,office_address2,office_address3,office_city,office_state,office_country,office_zipcode,office_phone_no,office_email,created_by,updated_by,customer_details,contact_details,item_category_id,statutory_info,social_media_list,buyer_details,customer_types_id,active,inserted_at,updated_at,approved_status,approved_on,approved_by,approved_no,site_id_multiple,region_id,vip_flag,cust_category,routeno_id,driver_id,promotions,blocklist,effective_date,office_district,district_id,cust_id,groups_id,country_name,state_name,city_name,marketing_info,quantity_restrictions_id,walkin_customer_flag,customer_subtype_id,salesman_multiple,auto_cust_id,address1,address2,address3,allowed_pay_types,is_predefined,card_number,cust_title,gender_asp,middle_name,last_name,name_in_card,nationality,iss_branch,application_no,application_date,id_type,id_number,asp_card_no,asp_card_status,auto_customer_no,date_of_birth,asp_family_info,inter_unite_flag,accounting_id,accounting_site_id,ware_house_id,segment_id,sez,seq_no,pin_code)
+select id,name,company_type,company_name,brand_name,owner_name,item_category,ar_ledger,person_name,person_email,address,mobile_number,phone_number,credit_day,credit_limit,credit_rate,credit_limit_set,credit_days,overdue_amount,office_address1,office_address2,office_address3,office_city,office_state,office_country,office_zipcode,office_phone_no,office_email,created_by,updated_by,customer_details,contact_details,item_category_id,statutory_info,social_media_list,buyer_details,customer_types_id,active,inserted_at,updated_at,approved_status,approved_on,approved_by,approved_no,site_id_multiple,region_id,vip_flag,cust_category,routeno_id,driver_id,promotions,blocklist,effective_date,office_district,district_id,cust_id,groups_id,country_name,state_name,city_name,marketing_info,quantity_restrictions_id,walkin_customer_flag,customer_subtype_id,salesman_multiple,auto_cust_id,address1,address2,address3,allowed_pay_types,is_predefined,card_number,cust_title,gender_asp,middle_name,last_name,name_in_card,nationality,iss_branch,application_no,application_date,id_type,id_number,asp_card_no,asp_card_status,auto_customer_no,date_of_birth,asp_family_info,inter_unite_flag,accounting_id,accounting_site_id,ware_house_id,segment_id,sez,seq_no,pin_code
+from trade_premium_old.customer where ware_house_id is null;
+
+SELECT SETVAL((SELECT PG_GET_SERIAL_SEQUENCE('"customer"', 'id')), (SELECT (MAX("id") + 1) FROM customer), FALSE);
+
+
+insert into trade_premium.customer_dtls(id,contact_name,brand_name,address_1,address_2,address_3,country,state,city,zipcode,mobile_no,email,inserted_at,updated_at,active,customer_id,country_name,state_name,city_name,dial_code,district_code,district_names,district_id,age_range,date_of_birth,no_of_members,last_name)
+select id,contact_name,brand_name,address_1,address_2,address_3,country,state,city,zipcode,mobile_no,email,inserted_at,updated_at,active,customer_id,country_name,state_name,city_name,dial_code,district_code,district_names,district_id,age_range,date_of_birth,no_of_members,last_name from trade_premium_old.customer_dtls;
+
+SELECT SETVAL((SELECT PG_GET_SERIAL_SEQUENCE('"customer_dtls"', 'id')), (SELECT (MAX("id") + 1) FROM customer_dtls), FALSE);
+
+insert into trade_premium.customer_statutory(id,reg_no,expiry,image_uploaded,statutory_name,transaction_tye,active,created_by,updated_by,image_name,inserted_at,updated_at,customer_id,groups_id)
+select id,reg_no,expiry,image_uploaded,statutory_name,transaction_tye,active,created_by,updated_by,image_name,inserted_at,updated_at,customer_id,groups_id from trade_premium_old.customer_statutory;
+
+SELECT SETVAL((SELECT PG_GET_SERIAL_SEQUENCE('"customer_statutory"', 'id')), (SELECT (MAX("id") + 1) FROM customer_statutory), FALSE);
+
+
+insert into price_setting(id,transaction_type,is_applied_price,df_wholesale_margin_price,df_retail_margin_price,dp_wholesale_margin_price,dp_retail_margin_price,active,label,inserted_at,updated_at)
+select id,transaction_type,is_applied_price,df_wholesale_margin_price,df_retail_margin_price,dp_wholesale_margin_price,dp_retail_margin_price,active,label,inserted_at,updated_at
+from trade_premium_old.price_setting ps;
+
+
+insert into trade_premium.vendor_mstrs(id,address_doc,brand,vendor_contact,socail_media,billing_address,alternative_address,alternative_address_2,phone_no,attachments,vendor_name,web_site,active,designation,reason_of_reject,mode,inserted_at,updated_at,email,salutation,firstname,lastname,country,mobile_no,contract,end_dt,start_dt,audit_doc,audit_mandatory,last_audit_conducted_on,next_audit_due_on,contract_doc,approved_status,approved_on,approved_by,approved_no,state,city,pin_code,priority,vendor_type,created_by,updated_by,seq_no,blocklist,effective_date,auto_vendor_id,is_predefined,fax_no,vendor_ledger_code,accounting_id,accounting_site_id,ware_house_id,inter_unite_flag,sez,tds_tax_rate_id)
+select id,address_doc,brand,vendor_contact,socail_media,billing_address,alternative_address,alternative_address_2,phone_no,attachments,vendor_name,web_site,active,designation,reason_of_reject,mode,inserted_at,updated_at,email,salutation,firstname,lastname,country,mobile_no,contract,end_dt,start_dt,audit_doc,audit_mandatory,last_audit_conducted_on,next_audit_due_on,contract_doc,approved_status,approved_on,approved_by,approved_no,state,city,pin_code,priority,vendor_type,created_by,updated_by,seq_no,blocklist,effective_date,auto_vendor_id,is_predefined,fax_no,vendor_ledger_code,accounting_id,accounting_site_id,ware_house_id,inter_unite_flag,sez,tds_tax_rate_id
+from trade_premium_old.vendor_mstrs where ware_house_id is null and id > 2;
+
+SELECT SETVAL((SELECT PG_GET_SERIAL_SEQUENCE('"vendor_mstrs"', 'id')), (SELECT (MAX("id") + 1) FROM vendor_mstrs), FALSE);
+select * from vend
+
+insert into trade_premium.vendor_billing_dtls(id,acct_no,bank_name,credit_days,credit_limit,currency,ifsc,active,vendor_mstr_id,inserted_at,updated_at,credit_day,credit_rate,overdue_amount,multi_currency,credit_limit_set,branch)
+select id,acct_no,bank_name,credit_days,credit_limit,currency,ifsc,active,vendor_mstr_id,inserted_at,updated_at,credit_day,credit_rate,overdue_amount,multi_currency,credit_limit_set,branch
+from trade_premium_old.vendor_billing_dtls where id > 1 and vendor_mstr_id not in (2,9,8,11,10,151,7,14);
+
+SELECT SETVAL((SELECT PG_GET_SERIAL_SEQUENCE('"vendor_billing_dtls"', 'id')), (SELECT (MAX("id") + 1) FROM vendor_billing_dtls), FALSE);
+
+insert into trade_premium.vendor_info(id,vendor_mstrs_id,first_name,last_name,email_id,country,state,city,zip_code,mobile_code,mobile_no,company_phone_no,designation,ap_ledger,created_by,updated_by,active,salutation,country_code,state_code,city_code,inserted_at,updated_at)
+select id,vendor_mstrs_id,first_name,last_name,email_id,country,state,city,zip_code,mobile_code,mobile_no,company_phone_no,designation,ap_ledger,created_by,updated_by,active,salutation,country_code,state_code,city_code,inserted_at,updated_at
+from trade_premium_old.vendor_info where vendor_mstrs_id not in (2,9,8,11,10,151,7,14);
+
+
+SELECT SETVAL((SELECT PG_GET_SERIAL_SEQUENCE('"vendor_info"', 'id')), (SELECT (MAX("id") + 1) FROM vendor_info), FALSE);
+
+
+insert into trade_sfolnew.modules_role_rights(id,module_code,module_name,description,active,modules_rights_id,roles_id,inserted_at,updated_at)
+select id,module_code,module_name,description,active,modules_rights_id,roles_id,inserted_at,updated_at
+from trade_sfol.modules_role_rights;
+
+SELECT SETVAL((SELECT PG_GET_SERIAL_SEQUENCE('"modules_role_rights"', 'id')), (SELECT (MAX("id") + 1) FROM modules_role_rights), FALSE);
+
+
+insert into trade_sfolnew.screen_role_rights(id,screen_code,screen_name,description,active,landing,add_screen,edit_screen,delete_screen,view_screen,modules_rights_id,roles_id,inserted_at,updated_at)
+select id,screen_code,screen_name,description,active,landing,add_screen,edit_screen,delete_screen,view_screen,modules_rights_id,roles_id,inserted_at,updated_at
+from trade_sfol.screen_role_rights;
+
+
+SELECT SETVAL((SELECT PG_GET_SERIAL_SEQUENCE('"screen_role_rights"', 'id')), (SELECT (MAX("id") + 1) FROM screen_role_rights), FALSE);
+
+select * from public.cron_job_triggers cjt where is_runned = false;
+
+
+insert into trade_sfolnew.item(id,name,item_code,only_code,image_seq,image_name,image_url,seq_no,created_by,updated_by,brand,colors,hs_code_desc,active,item_category_id,division_id,section_id,item_type_id,item_classification_id,hs_code_id,inserted_at,updated_at,packaging_unit,bar_code,is_type_bar_code,reason_for_inactivation,ware_house_id,approved_status,approved_on,approved_by,approved_no,material_id,vendor_bar_code,copy_item_id,material_item_id,is_content_ltr,ltr_content_ratio,raw_material_make_id,tube_code,old_item_code,created_date,attachments_upload,short_name,image_uploaded_year,transaction_type,rcm,brand_multi,item_code_lt,only_code_lt,item_code_lts,item_code_seq,is_contains,ltr_contains_ratio)
+select id,name,item_code,only_code,image_seq,image_name,image_url,seq_no,created_by,updated_by,brand,colors,hs_code_desc,active,item_category_id,division_id,section_id,item_type_id,item_classification_id,hs_code_id,inserted_at,updated_at,packaging_unit,bar_code,is_type_bar_code,reason_for_inactivation,ware_house_id,approved_status,approved_on,approved_by,approved_no,material_id,vendor_bar_code,copy_item_id,material_item_id,is_content_ltr,ltr_content_ratio,raw_material_make_id,tube_code,old_item_code,created_date,attachments_upload,short_name,image_uploaded_year,transaction_type,rcm,brand_multi,item_code_lt,only_code_lt,item_code_lts,item_code_seq,is_contains,ltr_contains_ratio
+from trade_sfol.item where id between 1014 and 1084;
+
+SELECT SETVAL((SELECT PG_GET_SERIAL_SEQUENCE('"item"', 'id')), (SELECT (MAX("id") + 1) FROM item), FALSE);
+
+insert into trade_sfolnew.item_uom(type,dimension,created_by,updated_by,item_mstr_id,uom_id,active,inserted_at,updated_at)
+select type,dimension,created_by,updated_by,item_mstr_id,uom_id,active,inserted_at,updated_at
+from trade_sfol.item_uom where item_mstr_id between 1014 and 1084;
+
+SELECT SETVAL((SELECT PG_GET_SERIAL_SEQUENCE('"item_uom"', 'id')), (SELECT (MAX("id") + 1) FROM item_uom), FALSE);
+
+
+insert into trade_sfolnew.item_uom_conversions(item_mstr_id,factors,created_by,updated_by,active,from_uom_id,to_uom_id,inserted_at,updated_at)
+select item_mstr_id,factors,created_by,updated_by,active,from_uom_id,to_uom_id,inserted_at,updated_at
+from trade_sfol.item_uom_conversions where item_mstr_id between 1014 and 1084;
+
+SELECT SETVAL((SELECT PG_GET_SERIAL_SEQUENCE('"item_uom_conversions"', 'id')), (SELECT (MAX("id") + 1) FROM item_uom_conversions), FALSE);
+
+select * from item_uom_conversions where item_mstr_id between 1014 and 1084;
+
+insert into trade_sfolnew.hs_code(id,name,description,code,selling_rate,purchase_rate,created_by,updated_by,active,inserted_at,updated_at,purchase_tax_id,selling_tax_id,item_category_id,project_category_id)
+select id,name,description,code,selling_rate,purchase_rate,created_by,updated_by,active,inserted_at,updated_at,purchase_tax_id,selling_tax_id,item_category_id,project_category_id
+from trade_sfol.hs_code where id > 329;
+
+SELECT SETVAL((SELECT PG_GET_SERIAL_SEQUENCE('"hs_code"', 'id')), (SELECT (MAX("id") + 1) FROM hs_code), FALSE);
+
+
+insert into trade_sfolnew.hsn_tax(id,hs_code_id,tax_id,is_included_in_po,active,inserted_at,updated_at,to_be_added_in_cogs)
+select id,hs_code_id,tax_id,is_included_in_po,active,inserted_at,updated_at,to_be_added_in_cogs
+from trade_sfol.hsn_tax where hs_code_id > 329;
+
+SELECT SETVAL((SELECT PG_GET_SERIAL_SEQUENCE('"hsn_tax"', 'id')), (SELECT (MAX("id") + 1) FROM hsn_tax), FALSE);
+
+
+insert into trade_sfolnew.item_mstr_attribute(field_type,attribute_text,attribute_list_id,item_mstr_id,version,created_by,updated_by,active,attribute_type_id,inserted_at,updated_at)
+select field_type,attribute_text,attribute_list_id,item_mstr_id,version,created_by,updated_by,active,attribute_type_id,inserted_at,updated_at
+from trade_sfol.item_mstr_attribute where item_mstr_id between 1014 and 1084;
+
+SELECT SETVAL((SELECT PG_GET_SERIAL_SEQUENCE('"item_mstr_attribute"', 'id')), (SELECT (MAX("id") + 1) FROM item_mstr_attribute), FALSE);
+
+
+-- bom_type
+
+insert into trade_sfolnew.bom_type(id,name,description,active,created_by,updated_by,inserted_at,updated_at,effective_from,effective_to)
+select id,name,description,active,created_by,updated_by,inserted_at,updated_at,effective_from,effective_to
+from trade_sfol.bom_type;
+
+SELECT SETVAL((SELECT PG_GET_SERIAL_SEQUENCE('"bom_type"', 'id')), (SELECT (MAX("id") + 1) FROM bom_type), FALSE);
+
+-- bill_of_materials
+
+insert into trade_sfolnew.bill_of_materials(id,bom_type,item_id,batch_qty,uom,inserted_at,updated_at,bom_code,bom_name,fg_item_id,output_qty,output_uom,active,effective_from,effective_to)
+select id,bom_type,item_id,batch_qty,uom,inserted_at,updated_at,bom_code,bom_name,fg_item_id,output_qty,output_uom,active,effective_from,effective_to
+from trade_sfol.bill_of_materials;
+
+SELECT SETVAL((SELECT PG_GET_SERIAL_SEQUENCE('"bill_of_materials"', 'id')), (SELECT (MAX("id") + 1) FROM bill_of_materials), FALSE);
+
+-- bom_process_latest
+
+insert into trade_sfolnew.bom_process_latest(id,bill_of_materials_id,config_process_id,hrs_batch,flag,item_id,uom,qty,allocation,inserted_at,updated_at,order_by,effective_from,effective_to)
+select id,bill_of_materials_id,config_process_id,hrs_batch,flag,item_id,uom,qty,allocation,inserted_at,updated_at,order_by,effective_from,effective_to
+from trade_sfol.bom_process_latest;
+
+SELECT SETVAL((SELECT PG_GET_SERIAL_SEQUENCE('"bom_process_latest"', 'id')), (SELECT (MAX("id") + 1) FROM bom_process_latest), FALSE);
+
+-- bom_machinery_costing
+
+insert into trade_sfolnew.bom_machinery_costing(id,bill_of_materials_id,machine_id,capacity,batch_hrs,machinery_cost,inserted_at,updated_at,config_process_id,order_by,hourly_rate,effective_from,effective_to)
+select id,bill_of_materials_id,machine_id,capacity,batch_hrs,machinery_cost,inserted_at,updated_at,config_process_id,order_by,hourly_rate,effective_from,effective_to
+from trade_sfol.bom_machinery_costing;
+
+SELECT SETVAL((SELECT PG_GET_SERIAL_SEQUENCE('"bom_machinery_costing"', 'id')), (SELECT (MAX("id") + 1) FROM bom_machinery_costing), FALSE);
+
+
+-- bom_labour_costing
+
+insert into trade_sfolnew.bom_labour_costing(id,bill_of_materials_id,labour_id,man_costing,batch_hrs,labour_cost,inserted_at,updated_at,config_proces_id,config_process_id,order_by,hourly_rate,effective_from,effective_to)
+select id,bill_of_materials_id,labour_id,man_costing,batch_hrs,labour_cost,inserted_at,updated_at,config_proces_id,config_process_id,order_by,hourly_rate,effective_from,effective_to
+from trade_sfol.bom_labour_costing;
+
+SELECT SETVAL((SELECT PG_GET_SERIAL_SEQUENCE('"bom_labour_costing"', 'id')), (SELECT (MAX("id") + 1) FROM bom_labour_costing), FALSE);
+
+-- bom_over_heads
+
+
+insert into trade_sfolnew.bom_over_heads(id,bill_of_materials_id,overheads_id,batch_hrs,overheads_cost,inserted_at,updated_at,config_proces_id,config_process_id,order_by,hourly_rate,effective_from,effective_to)
+select id,bill_of_materials_id,overheads_id,batch_hrs,overheads_cost,inserted_at,updated_at,config_proces_id,config_process_id,order_by,hourly_rate,effective_from,effective_to
+from trade_sfol.bom_over_heads;
+
+SELECT SETVAL((SELECT PG_GET_SERIAL_SEQUENCE('"bom_over_heads"', 'id')), (SELECT (MAX("id") + 1) FROM bom_over_heads), FALSE);
+
+-- bom_qc
+
+insert into trade_sfolnew.bom_qc(id,bill_of_materials_id,qc_id,required_results,tolerence,inserted_at,updated_at,config_process_id,order_by,effective_from,effective_to,item_id)
+select id,bill_of_materials_id,qc_id,required_results,tolerence,inserted_at,updated_at,config_process_id,order_by,effective_from,effective_to,item_id
+from trade_sfol.bom_qc;
+
+SELECT SETVAL((SELECT PG_GET_SERIAL_SEQUENCE('"bom_qc"', 'id')), (SELECT (MAX("id") + 1) FROM bom_qc), FALSE);
+
+
